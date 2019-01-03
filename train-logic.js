@@ -15,8 +15,8 @@ var currentTime = moment();
 
 var trainName = "";
 var destination = "";
-var firstTrainTime = "";
-var frequency = 0;
+var startTime = "";
+var frequency = 10;
 
 
   $("#add-train").on("click", function(event) {
@@ -33,35 +33,45 @@ var frequency = 0;
           startTime: startTime,
           frequency: frequency,   
       });
-    });
-    console.log("Working" );
-    
+    });    
 
     
     database.ref().on("child_added", function(childSnapshot) {
-        var newTrain = childSnapshot.val().trainName;
+        var newName = childSnapshot.val().trainName;
         var newDestination = childSnapshot.val().destination;
         var newStartTime = childSnapshot.val().startTime;
         var newFreq = childSnapshot.val().frequency;
 
-        var startTimeConverted = moment(startTime, "hh:mm").subtract(1, "years");
+        var newStartTime = "3:00"
+
+        var startTimeConverted = moment(newStartTime, "HH:mm").subtract(1, "years");
+        console.log(startTimeConverted);
+        
         var currentTime = moment();
+        console.log("CURRENT TIME: " + moment(currentTime).format("HH:mm"));
+
         var diffTime = moment().diff(moment(startTimeConverted), "minutes");
-        var tReainder = diffTime % Frequency
-        var tMinutesTillTrain = Frequency - tRemainder;
-        var nextTrain = moment().add(tMinutesTillTrain, "minutes"); 
+        console.log("DIFFERENCE IN TIME: " + diffTime);
+
+        var tRemainder = diffTime % frequency
+        console.log(tRemainder);
+        
+        var tMinutesTillTrain = frequency - tRemainder;
+        console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+        
+
+        var newTrain = moment().add(tMinutesTillTrain, "minutes"); 
+        var newTrainConverted = moment(newTrain).format("HH:mm A");
+        console.log("ARRIVAL TIME: " + moment(newTrain).format("HH:mm A"));
+        
 
         $("#all-display").append(
-            "<tr><td>" + newTrain +
-            "<tr><td>" + newLocation +
-            "<tr><td>" + newFreq +
-            "<tr><td>" + catchTrain +
-            "<tr><td>" + tMinutesTillTrain + "<tr><td>");
+            "<tr><td>" + newName + "</td>" +
+            "<td>" + newDestination + "</td>" +
+            "<td>" + newFreq + "</td>" +
+            "<td>" + newTrainConverted + "</td>" +
+            "<td>" + tMinutesTillTrain + "</td></tr>");
     });
-
-    // function(errorObject) {
-    //     console.log("Error reading failed " + errorObject.code);
-    // }
   
 
     

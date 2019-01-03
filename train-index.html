@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Train Times</title>
 </head>
@@ -31,7 +31,9 @@
                                 <th scope="col">Minutes Away</th>
                               </tr>
                             </thead>
-                            <tbody id="all-display"></tbody>
+                            <tbody id="all-display">
+                                
+                            </tbody>
                     </table>
             </div>
 
@@ -49,19 +51,19 @@
                                     <form>
                                         <div class="form-group">
                                             <label for="formGroupExampleInput">Train Name</label>
-                                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="South West Express">
+                                            <input type="text" class="form-control" id="train-input" placeholder="South West Express">
                                         </div>
                                         <div class="form-group">
                                             <label for="formGroupExampleInput2">Destination</label>
-                                            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="LA">
+                                            <input type="text" class="form-control" id="destination-input" placeholder="LA">
                                         </div>
                                         <div class="form-group">
                                             <label for="formGroupExampleInput2">First Time</label>
-                                            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="5:15">
+                                            <input type="text" class="form-control" id="time-input" placeholder="5:15">
                                         </div>
                                         <div class="form-group">
                                             <label for="formGroupExampleInput2">Frequency</label>
-                                            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="25">
+                                            <input type="text" class="form-control" id="frequency" placeholder="25">
                                         </div>
                                         </form>
                                         <button id="add-train" type="submit" class="btn btn-primary">Submit</button>
